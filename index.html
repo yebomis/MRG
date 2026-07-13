@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MRG - Modified Reciprocity Game</title>
+  <meta name="description" content="Modified Reciprocity Game experimental tool">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Progress Bar -->
+  <div class="progress-container">
+    <div class="progress-bar">
+      <div class="progress-fill" id="progress-fill"></div>
+    </div>
+    <div class="progress-label" id="progress-label"></div>
+  </div>
+
+  <main class="container">
+
+    <!-- ==================== ONBOARDING ==================== -->
+
+    <!-- Screen: Welcome -->
+    <section id="screen-welcome" class="screen active">
+      <div class="card card-lg">
+        <h1>Reciprocity Game</h1>
+        <div class="card-body-text card-body-left">
+          <p>Thank you for participating in this experiment.</p>
+          <p>This experiment uses a <strong>'Reciprocity Game'</strong> and takes approximately <strong>10 minutes</strong> to complete.</p>
+          <p>In the Reciprocity Game, two players take turns choosing to <strong class="text-cooperate">Cooperate</strong> or <strong class="text-defect">Defect</strong> to earn <strong>rewards</strong>.</p>
+        </div>
+        <div class="form-group">
+          <label for="cloud-research-id">Please enter your CloudResearch ID to begin</label>
+          <input type="text" id="cloud-research-id" class="input" placeholder="Enter your ID here" autocomplete="off">
+          <p class="input-hint" id="id-error"></p>
+        </div>
+        <button class="btn btn-next" id="btn-start" disabled>Next</button>
+      </div>
+    </section>
+
+    <!-- Screen: Tutorial 1 - Flow Diagram Overview -->
+    <section id="screen-tutorial-1" class="screen">
+      <div class="card card-lg">
+        <h2>Game Flow Overview</h2>
+        <p class="card-lead">The diagram below shows the overall game process.</p>
+        <div class="flow-diagram" id="flow-diagram-tut1"></div>
+        <p class="text-muted-sm" style="margin-top: -1rem; margin-bottom: 1.5rem;">※ This diagram is an example to help you understand the game structure.</p>
+        <div class="card-body-text card-body-left">
+          <p>• The dark <strong>P1</strong> represents <strong>Player 1 (You)</strong>.</p>
+          <p>• The light <strong>P2</strong> represents <strong>Player 2 (Opponent)</strong>.</p>
+          <p>• Turns alternate in the order: <strong>P1 → P2 → P1</strong>.</p>
+        </div>
+        <button class="btn btn-next" id="btn-tut1-next">Next</button>
+      </div>
+    </section>
+
+    <!-- Screen: Tutorial 1a - Choice Meanings -->
+    <section id="screen-tutorial-1a" class="screen">
+      <div class="card card-lg">
+        <h2>What Each Choice Means</h2>
+        <div class="flow-diagram" id="flow-diagram-tut1a"></div>
+        <p class="text-muted-sm" style="margin-top: -1rem; margin-bottom: 1.5rem;">※ This diagram is an example to help you understand the game structure.</p>
+        <div class="card-body-text card-body-left">
+          <p>• On each turn, a player can choose <strong class="text-cooperate">Cooperate (C)</strong> or <strong class="text-defect">Defect (D)</strong>.</p>
+          <p>• <strong class="text-cooperate">Cooperate (C)</strong> = the horizontal arrow → (the game continues to the next player).</p>
+          <p>• <strong class="text-defect">Defect (D)</strong> = the downward arrow ↓ (the game ends immediately with the payoff shown below).</p>
+        </div>
+        <div class="btn-group">
+          <button class="btn btn-back" id="btn-tut1a-back">Back</button>
+          <button class="btn btn-next" id="btn-tut1a-next">Next</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Screen: Tutorial 1b - Stars = Rewards -->
+    <section id="screen-tutorial-1b" class="screen">
+      <div class="card card-lg">
+        <h2>Understanding Rewards</h2>
+        <div class="flow-diagram" id="flow-diagram-tut1b"></div>
+        <p class="text-muted-sm" style="margin-top: -1rem; margin-bottom: 1.5rem;">※ This diagram is an example to help you understand the game structure.</p>
+        <div class="card-body-text card-body-left">
+          <p>• The <strong>star symbols (★)</strong> in the diagram represent <strong>rewards</strong>.</p>
+          <p>• <strong>★ (dark stars)</strong> = <strong>Your</strong> reward.</p>
+          <p>• <strong class="text-muted">☆ (light stars)</strong> = <strong>Opponent's</strong> reward.</p>
+          <p>• Players receive <strong>different rewards</strong> depending on both players' choices.</p>
+        </div>
+        <div class="btn-group">
+          <button class="btn btn-back" id="btn-tut1b-back">Back</button>
+          <button class="btn btn-next" id="btn-tut1b-next">Next</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Screen: Tutorial 2 - Key Insight: Cooperation vs Defection -->
+    <section id="screen-tutorial-2" class="screen">
+      <div class="card card-lg">
+        <h2>Key Insight: Cooperation vs. Defection</h2>
+        <div class="flow-diagram" id="flow-diagram-tut2"></div>
+        <p class="text-muted-sm" style="margin-top: -1rem; margin-bottom: 1.5rem;">※ This diagram is an example to help you understand the game structure.</p>
+        <div class="card-body-text card-body-left">
+          <p>• If <strong>all players cooperate</strong>, both players earn a <strong>moderate reward</strong> (★★ / ☆☆).</p>
+          <p>• If <strong>you defect at the final turn (Turn 3)</strong>, you take <strong>maximum reward</strong> (★★★★) but your <strong>opponent gets nothing</strong>.</p>
+          <p>• If <strong>you defect first (Turn 1)</strong>, the game ends early with a <strong>small reward</strong> for both (★ / ☆).</p>
+        </div>
+        <p class="text-muted-sm" style="text-align: center; margin-top: 1rem;">If you understand so far, press 'Next'.</p>
+        <div class="btn-group">
+          <button class="btn btn-back" id="btn-tut2-back">Back</button>
+          <button class="btn btn-next" id="btn-tut2-next">Next</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Screen: Tutorial 3 - 4 Outcomes Table -->
+    <section id="screen-tutorial-3" class="screen">
+      <div class="card card-lg">
+        <h2>The 4 Possible Outcomes</h2>
+        <div class="tutorial-split">
+          <div class="flow-diagram" id="flow-diagram-tut3"></div>
+          <p class="text-muted-sm" style="margin-top: -1rem; margin-bottom: 1.5rem;">※ This diagram is an example to help you understand the game structure.</p>
+          <div class="outcomes-table">
+            <table class="outcome-table">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>P1</th>
+                  <th>P2</th>
+                  <th>P1</th>
+                  <th>Your Reward</th>
+                  <th>Opp's Reward</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1)</td>
+                  <td class="text-cooperate">C</td>
+                  <td class="text-cooperate">C</td>
+                  <td class="text-cooperate">C</td>
+                  <td>★★</td>
+                  <td class="star-p2">☆☆</td>
+                </tr>
+                <tr>
+                  <td>2)</td>
+                  <td class="text-cooperate">C</td>
+                  <td class="text-defect">D</td>
+                  <td class="text-muted">—</td>
+                  <td>—</td>
+                  <td class="star-p2">☆☆</td>
+                </tr>
+                <tr>
+                  <td>3)</td>
+                  <td class="text-cooperate">C</td>
+                  <td class="text-cooperate">C</td>
+                  <td class="text-defect">D</td>
+                  <td>★★★★</td>
+                  <td class="star-p2">—</td>
+                </tr>
+                <tr>
+                  <td>4)</td>
+                  <td class="text-defect">D</td>
+                  <td class="text-muted">—</td>
+                  <td class="text-muted">—</td>
+                  <td>★</td>
+                  <td class="star-p2">☆</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="card-body-text card-body-left">
+          <p>• You will participate as <strong>P1 (Player 1)</strong>.</p>
+          <p>• As shown in the table, there are exactly <strong>4 possible outcomes</strong> depending on choices at each turn.</p>
+          <p class="text-muted-sm" style="text-align: center; margin-top: 1rem;">If you understand, press 'Next' to proceed.</p>
+        </div>
+        <div class="btn-group">
+          <button class="btn btn-back" id="btn-tut3-back">Back</button>
+          <button class="btn btn-next" id="btn-tut3-next">Next</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Screen: Pre-game Info -->
+    <section id="screen-pregame" class="screen">
+      <div class="card card-lg">
+        <h2>Before We Begin</h2>
+        <div class="card-body-text card-body-left">
+          <p>• You will now play <strong class="text-accent">two rounds</strong> of the Reciprocity Game with another player in real time.</p>
+          <div id="pregame-reward-info" style="margin-bottom: 0.5rem;"></div>
+          <p>• After all games are completed, your <strong class="text-accent">final rewards</strong> will be converted based on internal experiment criteria.</p>
+          <p>• The converted amount will be paid as <strong class="text-accent">actual compensation</strong> to both you and your opponent.</p>
+        </div>
+        <button class="btn btn-next" id="btn-pregame-next">Next</button>
+      </div>
+    </section>
+
+    <!-- Screen: Record Note -->
+    <section id="screen-record-note" class="screen">
+      <div class="card card-lg">
+        <h2>📝 Prepare to Record</h2>
+        <div class="card-body-text card-body-left">
+          <p>Since the rewards earned from the game are <strong>directly linked to your actual participation compensation</strong>,</p>
+          <p>please prepare <strong>a notepad on your phone or a piece of paper</strong> to record the rewards earned in each game.</p>
+        </div>
+        <p class="text-muted-sm" style="margin-top: 1.5rem; text-align: center;">Once you have prepared a way to record, press 'Next'.</p>
+        <button class="btn btn-next" id="btn-record-next">Next</button>
+      </div>
+    </section>
+
+    <!-- Screen: Game Start Announcement -->
+    <section id="screen-gamestart" class="screen">
+      <div class="card card-lg">
+        <div class="card-body-text card-body-center">
+          <h2>Let's begin the game.</h2>
+          <p>First, you will learn about your opponent.</p>
+        </div>
+        <button class="btn btn-next" id="btn-gamestart-next">Next</button>
+      </div>
+    </section>
+
+    <!-- Screen: Opponent Info (condition-dependent) -->
+    <section id="screen-opponent" class="screen">
+      <div class="card card-lg">
+        <h2>About Your Opponent</h2>
+        <div class="opponent-visual-container" id="opponent-visual"></div>
+        <div class="card-body-text card-body-left" id="opponent-description"></div>
+        <p class="text-muted-sm" style="margin-top:1.5rem; text-align: center;">When you're ready, press 'Next'. <strong>The experiment will begin.</strong></p>
+        <button class="btn btn-next" id="btn-opponent-next">Next</button>
+      </div>
+    </section>
+
+    <!-- Screen: Matching Animation -->
+    <section id="screen-matching" class="screen">
+      <div class="card card-lg">
+        <div class="card-body-text card-body-center">
+          <p>Attempting to match you with another player.</p>
+          <p>This may take up to <strong>1 minute</strong>, please wait...</p>
+          <div class="matching-spinner">
+            <div class="spinner"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Screen: Matched -->
+    <section id="screen-matched" class="screen">
+      <div class="card card-lg">
+        <div class="card-body-text card-body-center">
+          <p class="match-success">Match <strong class="text-cooperate">successful</strong>!</p>
+          <p>The game will begin in <strong id="matched-countdown">5</strong> seconds.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== ROUND START ==================== -->
+
+    <!-- Screen: Round 2 Intro -->
+    <section id="screen-round2-intro" class="screen">
+      <div class="card card-lg">
+        <div class="card-body-text card-body-left">
+          <h2>Round 2</h2>
+          <p>Now, let's begin the second game right away!</p>
+          <p>All choices are made in <strong>real time</strong> and <strong>cannot be reversed</strong>, so please consider each decision carefully.</p>
+          <p>Round 2 features <strong class="text-accent">doubled stakes</strong> compared to Round 1.</p>
+          <div class="round-payoff-section" id="round2-payoff-section"></div>
+        </div>
+        <button class="btn btn-next" id="btn-r2-next">Next</button>
+      </div>
+    </section>
+
+    <!-- ==================== TURN 1 ==================== -->
+
+    <!-- Screen: Turn 1 -->
+    <section id="screen-turn1" class="screen">
+      <div class="card card-lg">
+        <h2 class="choice-title" id="turn1-title">Choice 1.</h2>
+        <div class="card-body-text card-body-center">
+          <p id="turn1-desc"></p>
+          <div class="flow-diagram" id="turn1-flow-diagram"></div>
+        </div>
+        <p class="careful-note" id="turn1-understood"></p>
+        <div class="choice-buttons">
+          <button class="btn btn-cooperate" id="btn-t1-cooperate">Cooperate</button>
+          <button class="btn btn-defect" id="btn-t1-defect">Defect</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Screen: Turn 1 Cooperate Result -->
+    <section id="screen-turn1-cooperate" class="screen">
+      <div class="card card-lg">
+        <div class="card-body-text card-body-center">
+          <p>You chose <strong class="text-cooperate">Cooperate</strong>.</p>
+          <p>The turn now passes to <strong>your opponent</strong>.</p>
+        </div>
+        <button class="btn btn-next" id="btn-t1c-next">Next</button>
+      </div>
+    </section>
+
+    <!-- Screen: Turn 1 Defect Result -->
+    <section id="screen-turn1-defect" class="screen">
+      <div class="card card-lg">
+        <div class="card-body-text card-body-center" id="turn1-defect-content">
+          <!-- Filled by JS -->
+        </div>
+        <button class="btn btn-next" id="btn-t1d-next">Next</button>
+      </div>
+    </section>
+
+    <!-- ==================== TURN 2 (AI) ==================== -->
+
+    <!-- Screen: Turn 2 -->
+    <section id="screen-turn2" class="screen">
+      <div class="card card-lg">
+        <h2 class="choice-title" id="turn2-title">Choice 2.</h2>
+        <div class="card-body-text card-body-center">
+          <p><strong>It's your opponent's turn.</strong></p>
+        </div>
+        <div class="ai-section">
+          <div class="ai-avatar" id="ai-avatar">
+            <svg width="56" height="56" viewBox="0 0 64 64" fill="none">
+              <rect x="8" y="12" width="48" height="36" rx="8" stroke="currentColor" stroke-width="2.5"/>
+              <circle cx="24" cy="28" r="4" fill="currentColor"/>
+              <circle cx="40" cy="28" r="4" fill="currentColor"/>
+              <path d="M22 38 Q32 44 42 38" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+              <line x1="32" y1="4" x2="32" y2="12" stroke="currentColor" stroke-width="2.5"/>
+              <circle cx="32" cy="4" r="3" fill="currentColor"/>
+            </svg>
+          </div>
+          <div class="ai-thinking" id="ai-thinking">
+            <span class="thinking-text">Your opponent is thinking...</span>
+            <div class="thinking-dots"><span></span><span></span><span></span></div>
+          </div>
+          <div class="ai-decision" id="ai-decision" style="display:none;">
+            <p>Your opponent chose <strong class="text-cooperate">Cooperate</strong>.</p>
+            <p class="text-muted-sm" id="ai-sacrifice-detail"></p>
+          </div>
+        </div>
+        <button class="btn btn-next" id="btn-t2-next" style="display:none;">Next</button>
+      </div>
+    </section>
+
+    <!-- ==================== TURN 3 ==================== -->
+
+    <!-- Screen: Turn 3 -->
+    <section id="screen-turn3" class="screen">
+      <div class="card card-lg">
+        <h2 class="choice-title" id="turn3-title">Choice 3.</h2>
+        <div class="card-body-text card-body-center">
+          <p id="turn3-desc"></p>
+          <div class="flow-diagram" id="turn3-flow-diagram"></div>
+        </div>
+        <p class="careful-note">Take your time to consider your decision carefully.</p>
+        <div class="choice-buttons">
+          <button class="btn btn-cooperate" id="btn-t3-cooperate">Cooperate</button>
+          <button class="btn btn-defect" id="btn-t3-defect">Defect</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Screen: Turn 3 Result -->
+    <section id="screen-turn3-result" class="screen">
+      <div class="card card-lg">
+        <div class="card-body-text card-body-center" id="turn3-result-content">
+          <!-- Filled by JS -->
+        </div>
+        <button class="btn btn-next" id="btn-t3r-next">Next</button>
+      </div>
+    </section>
+
+    <!-- ==================== SURVEY ==================== -->
+
+    <section id="screen-survey" class="screen">
+      <div class="card card-lg">
+        <h2>Post-Game Survey</h2>
+        <p class="subtitle">Please answer the following questions about your experience.</p>
+
+        <div class="survey-section">
+          <h3>Emotional Responses</h3>
+          <p class="survey-instruction">Rate how strongly you experienced each emotion during the game (1 = Not at all, 7 = Very strongly):</p>
+          <div class="likert-group">
+            <label class="likert-label">Guilt</label>
+            <div class="likert-scale"><span class="likert-anchor">Not at all</span><div class="likert-options"><label><input type="radio" name="guilt" value="1"><span>1</span></label><label><input type="radio" name="guilt" value="2"><span>2</span></label><label><input type="radio" name="guilt" value="3"><span>3</span></label><label><input type="radio" name="guilt" value="4"><span>4</span></label><label><input type="radio" name="guilt" value="5"><span>5</span></label><label><input type="radio" name="guilt" value="6"><span>6</span></label><label><input type="radio" name="guilt" value="7"><span>7</span></label></div><span class="likert-anchor">Very strongly</span></div>
+          </div>
+          <div class="likert-group">
+            <label class="likert-label">Relief</label>
+            <div class="likert-scale"><span class="likert-anchor">Not at all</span><div class="likert-options"><label><input type="radio" name="relief" value="1"><span>1</span></label><label><input type="radio" name="relief" value="2"><span>2</span></label><label><input type="radio" name="relief" value="3"><span>3</span></label><label><input type="radio" name="relief" value="4"><span>4</span></label><label><input type="radio" name="relief" value="5"><span>5</span></label><label><input type="radio" name="relief" value="6"><span>6</span></label><label><input type="radio" name="relief" value="7"><span>7</span></label></div><span class="likert-anchor">Very strongly</span></div>
+          </div>
+          <div class="likert-group">
+            <label class="likert-label">Amusement</label>
+            <div class="likert-scale"><span class="likert-anchor">Not at all</span><div class="likert-options"><label><input type="radio" name="amusement" value="1"><span>1</span></label><label><input type="radio" name="amusement" value="2"><span>2</span></label><label><input type="radio" name="amusement" value="3"><span>3</span></label><label><input type="radio" name="amusement" value="4"><span>4</span></label><label><input type="radio" name="amusement" value="5"><span>5</span></label><label><input type="radio" name="amusement" value="6"><span>6</span></label><label><input type="radio" name="amusement" value="7"><span>7</span></label></div><span class="likert-anchor">Very strongly</span></div>
+          </div>
+          <div class="likert-group">
+            <label class="likert-label">Triumph</label>
+            <div class="likert-scale"><span class="likert-anchor">Not at all</span><div class="likert-options"><label><input type="radio" name="triumph" value="1"><span>1</span></label><label><input type="radio" name="triumph" value="2"><span>2</span></label><label><input type="radio" name="triumph" value="3"><span>3</span></label><label><input type="radio" name="triumph" value="4"><span>4</span></label><label><input type="radio" name="triumph" value="5"><span>5</span></label><label><input type="radio" name="triumph" value="6"><span>6</span></label><label><input type="radio" name="triumph" value="7"><span>7</span></label></div><span class="likert-anchor">Very strongly</span></div>
+          </div>
+        </div>
+        <div class="survey-section">
+          <h3>Trust</h3>
+          <div class="likert-group">
+            <label class="likert-label">How much did you trust your opponent during the game?</label>
+            <div class="likert-scale"><span class="likert-anchor">Not at all</span><div class="likert-options"><label><input type="radio" name="trust" value="1"><span>1</span></label><label><input type="radio" name="trust" value="2"><span>2</span></label><label><input type="radio" name="trust" value="3"><span>3</span></label><label><input type="radio" name="trust" value="4"><span>4</span></label><label><input type="radio" name="trust" value="5"><span>5</span></label><label><input type="radio" name="trust" value="6"><span>6</span></label><label><input type="radio" name="trust" value="7"><span>7</span></label></div><span class="likert-anchor">Very strongly</span></div>
+          </div>
+        </div>
+        <div class="survey-section">
+          <h3>Understanding the Game</h3>
+          
+          <div class="form-group" style="margin-bottom: 1.5rem;">
+            <label class="likert-label" style="font-size: 0.95rem; margin-bottom: 0.8rem;">1. Who was your opponent in this game?</label>
+            <div class="survey-radio-list">
+              <label class="radio-option"><input type="radio" name="manip-opponent" value="ai_agent"><span>An autonomous AI agent making decisions directly</span></label>
+              <label class="radio-option"><input type="radio" name="manip-opponent" value="human_direct"><span>Another human participant who made choices directly</span></label>
+              <label class="radio-option"><input type="radio" name="manip-opponent" value="human_ai"><span>Another human participant following an AI agent's decisions</span></label>
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 1.5rem;">
+            <label class="likert-label" style="font-size: 0.95rem; margin-bottom: 0.8rem;">2. When your opponent chose to Cooperate (C) in Turn 2, what did this choice mean?</label>
+            <div class="survey-radio-list">
+              <label class="radio-option"><input type="radio" name="manip-kindness" value="kindness"><span>They accepted a personal cost to give me an opportunity to earn more</span></label>
+              <label class="radio-option"><input type="radio" name="manip-kindness" value="rational"><span>They chose the option that maximized their own guaranteed payout</span></label>
+              <label class="radio-option"><input type="radio" name="manip-kindness" value="random"><span>They acted randomly without any goal or meaning</span></label>
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 1.5rem;">
+            <label class="likert-label" style="font-size: 0.95rem; margin-bottom: 0.8rem;">3. Did the reward stakes change between Round 1 and Round 2?</label>
+            <div class="survey-radio-list">
+              <label class="radio-option"><input type="radio" name="manip-stakes" value="doubled"><span>Yes, the reward stakes were doubled in Round 2</span></label>
+              <label class="radio-option"><input type="radio" name="manip-stakes" value="halved"><span>Yes, the reward stakes were halved in Round 2</span></label>
+              <label class="radio-option"><input type="radio" name="manip-stakes" value="same"><span>No, the reward stakes remained the same</span></label>
+            </div>
+          </div>
+        </div>
+
+        <div class="survey-section">
+          <h3>Choice Reflection</h3>
+          <div class="form-group">
+            <label for="choice-recon" class="likert-label" style="font-size: 0.95rem; margin-bottom: 0.8rem;">Please briefly describe why you made the choices you did:</label>
+            <textarea id="choice-recon" class="textarea" rows="4" placeholder="Type your response here..."></textarea>
+          </div>
+        </div>
+        <p class="survey-error" id="survey-error"></p>
+        <button class="btn btn-next" id="btn-submit-survey">Submit</button>
+      </div>
+    </section>
+
+    <!-- ==================== COMPLETE ==================== -->
+
+    <section id="screen-complete" class="screen">
+      <div class="card card-lg">
+        <h2>Thank you!</h2>
+        <div class="card-body-text card-body-center">
+          <p>All games have been completed.</p>
+        </div>
+        
+        <div class="debriefing-section" id="debriefing-section" style="display:none; text-align:left; background: #f8fafc; padding: 1.5rem; border-radius: var(--radius-sm); margin: 1.5rem 0; border: 1px solid var(--border-strong);">
+          <h3 style="color: var(--text-primary); margin-bottom: 0.5rem; font-size: 1.05rem;">[Experiment Debriefing]</h3>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem;">Thank you for your participation. To investigate natural decision-making, this experiment utilized some simulated elements.</p>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem;" id="debriefing-text"></p>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); font-weight: 600;">Regardless of the game outcome, you will receive your full participation compensation as initially promised on CloudResearch.</p>
+        </div>
+
+        <div class="final-summary">
+          <div class="summary-item">
+            <span class="summary-label">Total Earnings</span>
+            <span class="summary-value" id="final-total"></span>
+          </div>
+          <div class="summary-item">
+            <span class="summary-label">Completion Code</span>
+            <span class="summary-value summary-code" id="completion-code"></span>
+          </div>
+        </div>
+        <p class="completion-note">Please copy the completion code above and paste it into CloudResearch to confirm your participation.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
