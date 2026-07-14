@@ -827,6 +827,14 @@
       el.textContent = state.condition.formatReward(val).replace('+', '').replace('-', '');
     });
 
+    // Initialize visibility based on actual game choices
+    if (state.rounds[1].turn1Choice === 'D') {
+      document.getElementById('r1-turn3-questions').style.display = 'none';
+    }
+    if (state.rounds[2].turn1Choice === 'D') {
+      document.getElementById('r2-turn3-questions').style.display = 'none';
+    }
+
     // Handle conditional hiding for Round 1
     const r1t1Choice = document.querySelectorAll('input[name="r1_t1_choice"]');
     r1t1Choice.forEach(radio => {
@@ -878,14 +886,14 @@
           socialFraming: state.condition.socialFraming,
           rewardClarity: state.condition.rewardClarity,
           
-          game_r1_turn1Choice: 'C',
+          game_r1_turn1Choice: state.rounds[1].turn1Choice,
           game_r1_turn1Rt: state.rounds[1].turn1Rt,
           game_r1_turn3Choice: state.rounds[1].turn3Choice,
           game_r1_turn3Rt: state.rounds[1].turn3Rt,
           game_r1_participantReward: state.rounds[1].participantReward,
           game_r1_aiReward: state.rounds[1].aiReward,
           
-          game_r2_turn1Choice: 'C',
+          game_r2_turn1Choice: state.rounds[2].turn1Choice,
           game_r2_turn1Rt: state.rounds[2].turn1Rt,
           game_r2_turn3Choice: state.rounds[2].turn3Choice,
           game_r2_turn3Rt: state.rounds[2].turn3Rt,
