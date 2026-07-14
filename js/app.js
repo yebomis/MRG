@@ -309,6 +309,12 @@
   }
 
   function generateCompletionCode() {
+    const urlParams = new URLSearchParams(window.location.search);
+    // Use completion code from URL (CloudResearch connect uses fixed codes)
+    // You can pass it as ?ccode=978E31999D
+    const ccode = urlParams.get('ccode');
+    if (ccode) return ccode;
+
     const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
     let code = 'MRG-';
     for (let i = 0; i < 8; i++) code += chars.charAt(Math.floor(Math.random() * chars.length));
@@ -339,6 +345,14 @@
     const input = $('#cloud-research-id');
     const btn = $('#btn-start');
     const error = $('#id-error');
+
+    // Auto-fill from CloudResearch URL if available
+    const urlParams = new URLSearchParams(window.location.search);
+    const participantId = urlParams.get('participantId');
+    if (participantId) {
+      input.value = participantId;
+      btn.disabled = false;
+    }
 
     input.addEventListener('input', () => {
       btn.disabled = input.value.trim().length === 0;
@@ -806,41 +820,57 @@
 
   function showSurvey() {
     setProgress(23);
+    
+    // Update currency values based on condition
+    document.querySelectorAll('#post-game-survey [data-cur-val]').forEach(el => {
+      const val = parseInt(el.getAttribute('data-cur-val'));
+      el.textContent = state.condition.formatReward(val).replace('+', '').replace('-', '');
+    });
+
+    // Handle conditional hiding for Round 1
+    const r1t1Choice = document.querySelectorAll('input[name="r1_t1_choice"]');
+    r1t1Choice.forEach(radio => {
+      radio.addEventListener('change', (e) => {
+        const qDiv = document.getElementById('r1-turn3-questions');
+        if (e.target.value === 'D') {
+          qDiv.style.display = 'none';
+        } else {
+          qDiv.style.display = 'block';
+        }
+      });
+    });
+
+    // Handle conditional hiding for Round 2
+    const r2t1Choice = document.querySelectorAll('input[name="r2_t1_choice"]');
+    r2t1Choice.forEach(radio => {
+      radio.addEventListener('change', (e) => {
+        const qDiv = document.getElementById('r2-turn3-questions');
+        if (e.target.value === 'D') {
+          qDiv.style.display = 'none';
+        } else {
+          qDiv.style.display = 'block';
+        }
+      });
+    });
+
     showScreen('screen-survey');
-    const btn = freshButton('#btn-submit-survey');
-    btn.addEventListener('click', async () => {
+    
+    const form = document.getElementById('post-game-survey');
+    
+    // Remove the old button listener if there was any, but we are using form submit now
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = $('#btn-submit-survey');
       const error = $('#survey-error');
-      const guilt = document.querySelector('input[name="guilt"]:checked');
-      const relief = document.querySelector('input[name="relief"]:checked');
-      const amusement = document.querySelector('input[name="amusement"]:checked');
-      const triumph = document.querySelector('input[name="triumph"]:checked');
-      const trust = document.querySelector('input[name="trust"]:checked');
-      const manipOpponent = document.querySelector('input[name="manip-opponent"]:checked');
-      const manipKindness = document.querySelector('input[name="manip-kindness"]:checked');
-      const manipStakes = document.querySelector('input[name="manip-stakes"]:checked');
-      const recon = $('#choice-recon').value.trim();
-
-      if (!guilt || !relief || !amusement || !triumph || !trust) {
-        error.textContent = 'Please answer all rating questions before submitting.';
-        error.classList.add('visible');
-        return;
-      }
-      if (!manipOpponent || !manipKindness || !manipStakes) {
-        error.textContent = 'Please answer all understanding/manipulation check questions before submitting.';
-        error.classList.add('visible');
-        return;
-      }
-      if (!recon) {
-        error.textContent = 'Please provide a brief response for the choice reflection question.';
-        error.classList.add('visible');
-        return;
-      }
-
+      
       error.classList.remove('visible');
       btn.disabled = true;
       btn.textContent = 'Submitting...';
 
       try {
+        const formData = new FormData(form);
+        const surveyData = Object.fromEntries(formData.entries());
+
         // Aggregate all data to send in one batch
         const finalData = {
           cloudResearchId: state.cloudResearchId,
@@ -848,43 +878,37 @@
           socialFraming: state.condition.socialFraming,
           rewardClarity: state.condition.rewardClarity,
           
-          r1_turn1Choice: 'C',
-          r1_turn1Rt: state.rounds[1].turn1Rt,
-          r1_turn3Choice: state.rounds[1].turn3Choice,
-          r1_turn3Rt: state.rounds[1].turn3Rt,
-          r1_participantReward: state.rounds[1].participantReward,
-          r1_aiReward: state.rounds[1].aiReward,
+          game_r1_turn1Choice: 'C',
+          game_r1_turn1Rt: state.rounds[1].turn1Rt,
+          game_r1_turn3Choice: state.rounds[1].turn3Choice,
+          game_r1_turn3Rt: state.rounds[1].turn3Rt,
+          game_r1_participantReward: state.rounds[1].participantReward,
+          game_r1_aiReward: state.rounds[1].aiReward,
           
-          r2_turn1Choice: 'C',
-          r2_turn1Rt: state.rounds[2].turn1Rt,
-          r2_turn3Choice: state.rounds[2].turn3Choice,
-          r2_turn3Rt: state.rounds[2].turn3Rt,
-          r2_participantReward: state.rounds[2].participantReward,
-          r2_aiReward: state.rounds[2].aiReward,
+          game_r2_turn1Choice: 'C',
+          game_r2_turn1Rt: state.rounds[2].turn1Rt,
+          game_r2_turn3Choice: state.rounds[2].turn3Choice,
+          game_r2_turn3Rt: state.rounds[2].turn3Rt,
+          game_r2_participantReward: state.rounds[2].participantReward,
+          game_r2_aiReward: state.rounds[2].aiReward,
           
-          totalReward: state.totalReward,
-
-          survey_guilt: parseInt(guilt.value),
-          survey_relief: parseInt(relief.value),
-          survey_amusement: parseInt(amusement.value),
-          survey_triumph: parseInt(triumph.value),
-          survey_trustAppraisal: parseInt(trust.value),
-          survey_choiceReconstruction: recon,
-          survey_manipOpponent: manipOpponent.value,
-          survey_manipKindness: manipKindness.value,
-          survey_manipStakes: manipStakes.value
+          game_totalReward: state.totalReward,
+          
+          ...surveyData
         };
 
         await API.submitAllData(finalData);
         showComplete();
       } catch (err) {
+        console.error(err);
         error.textContent = 'Failed to submit. Please try again.';
         error.classList.add('visible');
         btn.disabled = false;
-        btn.textContent = 'Submit';
+        btn.textContent = 'Submit Survey';
       }
     });
   }
+
 
   function showComplete() {
     setProgress(25);

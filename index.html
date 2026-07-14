@@ -371,80 +371,287 @@
 
     <!-- ==================== SURVEY ==================== -->
 
-    <section id="screen-survey" class="screen">
-      <div class="card card-lg">
-        <h2>Post-Game Survey</h2>
-        <p class="subtitle">Please answer the following questions about your experience.</p>
+<section id="screen-survey" class="screen">
+  <div class="card card-lg" style="max-width: 800px;">
+    <h2>Post-Game Survey</h2>
+    <p class="subtitle">Please answer the following questions honestly.</p>
 
-        <div class="survey-section">
-          <h3>Emotional Responses</h3>
-          <p class="survey-instruction">Rate how strongly you experienced each emotion during the game (1 = Not at all, 7 = Very strongly):</p>
-          <div class="likert-group">
-            <label class="likert-label">Guilt</label>
-            <div class="likert-scale"><span class="likert-anchor">Not at all</span><div class="likert-options"><label><input type="radio" name="guilt" value="1"><span>1</span></label><label><input type="radio" name="guilt" value="2"><span>2</span></label><label><input type="radio" name="guilt" value="3"><span>3</span></label><label><input type="radio" name="guilt" value="4"><span>4</span></label><label><input type="radio" name="guilt" value="5"><span>5</span></label><label><input type="radio" name="guilt" value="6"><span>6</span></label><label><input type="radio" name="guilt" value="7"><span>7</span></label></div><span class="likert-anchor">Very strongly</span></div>
-          </div>
-          <div class="likert-group">
-            <label class="likert-label">Relief</label>
-            <div class="likert-scale"><span class="likert-anchor">Not at all</span><div class="likert-options"><label><input type="radio" name="relief" value="1"><span>1</span></label><label><input type="radio" name="relief" value="2"><span>2</span></label><label><input type="radio" name="relief" value="3"><span>3</span></label><label><input type="radio" name="relief" value="4"><span>4</span></label><label><input type="radio" name="relief" value="5"><span>5</span></label><label><input type="radio" name="relief" value="6"><span>6</span></label><label><input type="radio" name="relief" value="7"><span>7</span></label></div><span class="likert-anchor">Very strongly</span></div>
-          </div>
-          <div class="likert-group">
-            <label class="likert-label">Amusement</label>
-            <div class="likert-scale"><span class="likert-anchor">Not at all</span><div class="likert-options"><label><input type="radio" name="amusement" value="1"><span>1</span></label><label><input type="radio" name="amusement" value="2"><span>2</span></label><label><input type="radio" name="amusement" value="3"><span>3</span></label><label><input type="radio" name="amusement" value="4"><span>4</span></label><label><input type="radio" name="amusement" value="5"><span>5</span></label><label><input type="radio" name="amusement" value="6"><span>6</span></label><label><input type="radio" name="amusement" value="7"><span>7</span></label></div><span class="likert-anchor">Very strongly</span></div>
-          </div>
-          <div class="likert-group">
-            <label class="likert-label">Triumph</label>
-            <div class="likert-scale"><span class="likert-anchor">Not at all</span><div class="likert-options"><label><input type="radio" name="triumph" value="1"><span>1</span></label><label><input type="radio" name="triumph" value="2"><span>2</span></label><label><input type="radio" name="triumph" value="3"><span>3</span></label><label><input type="radio" name="triumph" value="4"><span>4</span></label><label><input type="radio" name="triumph" value="5"><span>5</span></label><label><input type="radio" name="triumph" value="6"><span>6</span></label><label><input type="radio" name="triumph" value="7"><span>7</span></label></div><span class="likert-anchor">Very strongly</span></div>
+    <form id="post-game-survey">
+      
+      <!-- SECTION 1: General -->
+      <div class="survey-section" id="survey-sec-1">
+        <h3>Section 1: General Information</h3>
+        
+        <div class="form-group" style="margin-bottom: 1.5rem;">
+          <label class="likert-label">Age (e.g., 19)</label>
+          <input type="number" name="age" class="textarea" style="max-width: 150px; padding: 0.5rem;" required>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 1.5rem;">
+          <label class="likert-label">Gender</label>
+          <div class="survey-radio-list">
+            <label class="radio-option"><input type="radio" name="gender" value="male" required><span>Male</span></label>
+            <label class="radio-option"><input type="radio" name="gender" value="female"><span>Female</span></label>
           </div>
         </div>
-        <div class="survey-section">
-          <h3>Trust</h3>
-          <div class="likert-group">
-            <label class="likert-label">How much did you trust your opponent during the game?</label>
-            <div class="likert-scale"><span class="likert-anchor">Not at all</span><div class="likert-options"><label><input type="radio" name="trust" value="1"><span>1</span></label><label><input type="radio" name="trust" value="2"><span>2</span></label><label><input type="radio" name="trust" value="3"><span>3</span></label><label><input type="radio" name="trust" value="4"><span>4</span></label><label><input type="radio" name="trust" value="5"><span>5</span></label><label><input type="radio" name="trust" value="6"><span>6</span></label><label><input type="radio" name="trust" value="7"><span>7</span></label></div><span class="likert-anchor">Very strongly</span></div>
+
+        <div class="form-group" style="margin-bottom: 1.5rem;">
+          <label class="likert-label">Monthly Average Income</label>
+          <div class="survey-radio-list">
+            <label class="radio-option"><input type="radio" name="income" value="under_500" required><span>Under $500</span></label>
+            <label class="radio-option"><input type="radio" name="income" value="500_1000"><span>$500 - $1,000</span></label>
+            <label class="radio-option"><input type="radio" name="income" value="1000_2000"><span>$1,000 - $2,000</span></label>
+            <label class="radio-option"><input type="radio" name="income" value="2000_3000"><span>$2,000 - $3,000</span></label>
+            <label class="radio-option"><input type="radio" name="income" value="3000_4000"><span>$3,000 - $4,000</span></label>
+            <label class="radio-option"><input type="radio" name="income" value="4000_5000"><span>$4,000 - $5,000</span></label>
+            <label class="radio-option"><input type="radio" name="income" value="5000_6000"><span>$5,000 - $6,000</span></label>
+            <label class="radio-option"><input type="radio" name="income" value="6000_7000"><span>$6,000 - $7,000</span></label>
+            <label class="radio-option"><input type="radio" name="income" value="7000_8000"><span>$7,000 - $8,000</span></label>
+            <label class="radio-option"><input type="radio" name="income" value="over_8000"><span>$8,000 or more</span></label>
           </div>
         </div>
-        <div class="survey-section">
-          <h3>Understanding the Game</h3>
+
+        <div class="form-group" style="margin-bottom: 1.5rem;">
+          <label class="likert-label">What is the total reward you earned from this game?</label>
+          <div class="survey-radio-list">
+            <label class="radio-option"><input type="radio" name="total_reward" value="50" required><span data-cur-val="50">50p</span></label>
+            <label class="radio-option"><input type="radio" name="total_reward" value="60"><span data-cur-val="60">60p</span></label>
+            <label class="radio-option"><input type="radio" name="total_reward" value="70"><span data-cur-val="70">70p</span></label>
+            <label class="radio-option"><input type="radio" name="total_reward" value="80"><span data-cur-val="80">80p</span></label>
+            <label class="radio-option"><input type="radio" name="total_reward" value="100"><span data-cur-val="100">100p</span></label>
+            <label class="radio-option"><input type="radio" name="total_reward" value="110"><span data-cur-val="110">110p</span></label>
+            <label class="radio-option"><input type="radio" name="total_reward" value="120"><span data-cur-val="120">120p</span></label>
+            <label class="radio-option"><input type="radio" name="total_reward" value="140"><span data-cur-val="140">140p</span></label>
+            <label class="radio-option"><input type="radio" name="total_reward" value="dont_remember"><span>Don't remember</span></label>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION 2: Round 1 -->
+      <div class="survey-section" id="survey-sec-2">
+        <h3>Section 2: First Round</h3>
+        
+        <div class="form-group" style="margin-bottom: 1.5rem;">
+          <label class="likert-label">What was your total reward in the first round? (excluding initial 20p)</label>
+          <div class="survey-radio-list">
+            <label class="radio-option"><input type="radio" name="r1_reward" value="10" required><span data-cur-val="10">10p</span></label>
+            <label class="radio-option"><input type="radio" name="r1_reward" value="20"><span data-cur-val="20">20p</span></label>
+            <label class="radio-option"><input type="radio" name="r1_reward" value="40"><span data-cur-val="40">40p</span></label>
+            <label class="radio-option"><input type="radio" name="r1_reward" value="dont_remember"><span>Don't remember</span></label>
+          </div>
+        </div>
+
+        <div class="likert-group">
+          <label class="likert-label">When starting the first round, how much did you trust your opponent?</label>
+          <div class="likert-scale"><span class="likert-anchor">Not at all</span><div class="likert-options"><label><input type="radio" name="r1_trust_before" value="1" required><span>1</span></label><label><input type="radio" name="r1_trust_before" value="2"><span>2</span></label><label><input type="radio" name="r1_trust_before" value="3"><span>3</span></label><label><input type="radio" name="r1_trust_before" value="4"><span>4</span></label><label><input type="radio" name="r1_trust_before" value="5"><span>5</span></label></div><span class="likert-anchor">Very much</span></div>
+        </div>
+
+        <div class="likert-group">
+          <label class="likert-label">When making your first choice, how much did you expect your opponent to cooperate in the next turn?</label>
+          <div class="likert-scale"><span class="likert-anchor">Not at all</span><div class="likert-options"><label><input type="radio" name="r1_expect_before" value="1" required><span>1</span></label><label><input type="radio" name="r1_expect_before" value="2"><span>2</span></label><label><input type="radio" name="r1_expect_before" value="3"><span>3</span></label><label><input type="radio" name="r1_expect_before" value="4"><span>4</span></label><label><input type="radio" name="r1_expect_before" value="5"><span>5</span></label></div><span class="likert-anchor">Very much</span></div>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 1.5rem;">
+          <label class="likert-label">What did you choose in your first turn of the first round?</label>
+          <div class="survey-radio-list">
+            <label class="radio-option"><input type="radio" name="r1_t1_choice" value="C" required><span>Cooperate</span></label>
+            <label class="radio-option"><input type="radio" name="r1_t1_choice" value="D"><span>Defect</span></label>
+            <label class="radio-option"><input type="radio" name="r1_t1_choice" value="dont_remember"><span>Don't remember</span></label>
+          </div>
+        </div>
+
+        <div class="likert-group">
+          <label class="likert-label">After your first choice in the first round, did you feel relief?</label>
+          <div class="likert-scale"><span class="likert-anchor">Not at all</span><div class="likert-options"><label><input type="radio" name="r1_t1_relief" value="1" required><span>1</span></label><label><input type="radio" name="r1_t1_relief" value="2"><span>2</span></label><label><input type="radio" name="r1_t1_relief" value="3"><span>3</span></label><label><input type="radio" name="r1_t1_relief" value="4"><span>4</span></label><label><input type="radio" name="r1_t1_relief" value="5"><span>5</span></label></div><span class="likert-anchor">Very much</span></div>
+        </div>
+        <div class="likert-group">
+          <label class="likert-label">After your first choice in the first round, did you feel a sense of triumph?</label>
+          <div class="likert-scale"><span class="likert-anchor">Not at all</span><div class="likert-options"><label><input type="radio" name="r1_t1_triumph" value="1" required><span>1</span></label><label><input type="radio" name="r1_t1_triumph" value="2"><span>2</span></label><label><input type="radio" name="r1_t1_triumph" value="3"><span>3</span></label><label><input type="radio" name="r1_t1_triumph" value="4"><span>4</span></label><label><input type="radio" name="r1_t1_triumph" value="5"><span>5</span></label></div><span class="likert-anchor">Very much</span></div>
+        </div>
+        <div class="likert-group">
+          <label class="likert-label">After your first choice in the first round, did you feel guilt?</label>
+          <div class="likert-scale"><span class="likert-anchor">Not at all</span><div class="likert-options"><label><input type="radio" name="r1_t1_guilt" value="1" required><span>1</span></label><label><input type="radio" name="r1_t1_guilt" value="2"><span>2</span></label><label><input type="radio" name="r1_t1_guilt" value="3"><span>3</span></label><label><input type="radio" name="r1_t1_guilt" value="4"><span>4</span></label><label><input type="radio" name="r1_t1_guilt" value="5"><span>5</span></label></div><span class="likert-anchor">Very much</span></div>
+        </div>
+        <div class="likert-group">
+          <label class="likert-label">After your first choice in the first round, did you feel amusement?</label>
+          <div class="likert-scale"><span class="likert-anchor">Not at all</span><div class="likert-options"><label><input type="radio" name="r1_t1_amusement" value="1" required><span>1</span></label><label><input type="radio" name="r1_t1_amusement" value="2"><span>2</span></label><label><input type="radio" name="r1_t1_amusement" value="3"><span>3</span></label><label><input type="radio" name="r1_t1_amusement" value="4"><span>4</span></label><label><input type="radio" name="r1_t1_amusement" value="5"><span>5</span></label></div><span class="likert-anchor">Very much</span></div>
+        </div>
+
+        <div id="r1-turn3-questions">
+          <hr style="margin: 2rem 0; border: none; border-top: 1px solid var(--border-color);">
+          <div class="likert-group">
+            <label class="likert-label">After the opponent's choice in their turn (cooperate or defect), how much did you trust the opponent?</label>
+            <div class="likert-scale"><span class="likert-anchor">Not at all</span><div class="likert-options"><label><input type="radio" name="r1_trust_after_opp" value="1"><span>1</span></label><label><input type="radio" name="r1_trust_after_opp" value="2"><span>2</span></label><label><input type="radio" name="r1_trust_after_opp" value="3"><span>3</span></label><label><input type="radio" name="r1_trust_after_opp" value="4"><span>4</span></label><label><input type="radio" name="r1_trust_after_opp" value="5"><span>5</span></label></div><span class="likert-anchor">Very much</span></div>
+          </div>
           
           <div class="form-group" style="margin-bottom: 1.5rem;">
-            <label class="likert-label" style="font-size: 0.95rem; margin-bottom: 0.8rem;">1. Who was your opponent in this game?</label>
+            <label class="likert-label">What did you choose in your third turn of the first round?</label>
             <div class="survey-radio-list">
-              <label class="radio-option"><input type="radio" name="manip-opponent" value="ai_agent"><span>An autonomous AI agent making decisions directly</span></label>
-              <label class="radio-option"><input type="radio" name="manip-opponent" value="human_direct"><span>Another human participant who made choices directly</span></label>
-              <label class="radio-option"><input type="radio" name="manip-opponent" value="human_ai"><span>Another human participant following an AI agent's decisions</span></label>
+              <label class="radio-option"><input type="radio" name="r1_t3_choice" value="C"><span>Cooperate</span></label>
+              <label class="radio-option"><input type="radio" name="r1_t3_choice" value="D"><span>Defect</span></label>
+              <label class="radio-option"><input type="radio" name="r1_t3_choice" value="dont_remember"><span>Don't remember</span></label>
             </div>
           </div>
 
-          <div class="form-group" style="margin-bottom: 1.5rem;">
-            <label class="likert-label" style="font-size: 0.95rem; margin-bottom: 0.8rem;">2. When your opponent chose to Cooperate (C) in Turn 2, what did this choice mean?</label>
-            <div class="survey-radio-list">
-              <label class="radio-option"><input type="radio" name="manip-kindness" value="kindness"><span>They accepted a personal cost to give me an opportunity to earn more</span></label>
-              <label class="radio-option"><input type="radio" name="manip-kindness" value="rational"><span>They chose the option that maximized their own guaranteed payout</span></label>
-              <label class="radio-option"><input type="radio" name="manip-kindness" value="random"><span>They acted randomly without any goal or meaning</span></label>
-            </div>
+          <div class="likert-group">
+            <label class="likert-label">When making your third choice, how much did you expect your opponent to cooperate in the next round?</label>
+            <div class="likert-scale"><span class="likert-anchor">Not at all</span><div class="likert-options"><label><input type="radio" name="r1_expect_after_t3" value="1"><span>1</span></label><label><input type="radio" name="r1_expect_after_t3" value="2"><span>2</span></label><label><input type="radio" name="r1_expect_after_t3" value="3"><span>3</span></label><label><input type="radio" name="r1_expect_after_t3" value="4"><span>4</span></label><label><input type="radio" name="r1_expect_after_t3" value="5"><span>5</span></label></div><span class="likert-anchor">Very much</span></div>
           </div>
-
-          <div class="form-group" style="margin-bottom: 1.5rem;">
-            <label class="likert-label" style="font-size: 0.95rem; margin-bottom: 0.8rem;">3. Did the reward stakes change between Round 1 and Round 2?</label>
-            <div class="survey-radio-list">
-              <label class="radio-option"><input type="radio" name="manip-stakes" value="doubled"><span>Yes, the reward stakes were doubled in Round 2</span></label>
-              <label class="radio-option"><input type="radio" name="manip-stakes" value="halved"><span>Yes, the reward stakes were halved in Round 2</span></label>
-              <label class="radio-option"><input type="radio" name="manip-stakes" value="same"><span>No, the reward stakes remained the same</span></label>
-            </div>
+          <div class="likert-group">
+            <label class="likert-label">After your third choice in the first round, did you feel relief?</label>
+            <div class="likert-scale"><span class="likert-anchor">Not at all</span><div class="likert-options"><label><input type="radio" name="r1_t3_relief" value="1"><span>1</span></label><label><input type="radio" name="r1_t3_relief" value="2"><span>2</span></label><label><input type="radio" name="r1_t3_relief" value="3"><span>3</span></label><label><input type="radio" name="r1_t3_relief" value="4"><span>4</span></label><label><input type="radio" name="r1_t3_relief" value="5"><span>5</span></label></div><span class="likert-anchor">Very much</span></div>
+          </div>
+          <div class="likert-group">
+            <label class="likert-label">After your third choice in the first round, did you feel a sense of triumph?</label>
+            <div class="likert-scale"><span class="likert-anchor">Not at all</span><div class="likert-options"><label><input type="radio" name="r1_t3_triumph" value="1"><span>1</span></label><label><input type="radio" name="r1_t3_triumph" value="2"><span>2</span></label><label><input type="radio" name="r1_t3_triumph" value="3"><span>3</span></label><label><input type="radio" name="r1_t3_triumph" value="4"><span>4</span></label><label><input type="radio" name="r1_t3_triumph" value="5"><span>5</span></label></div><span class="likert-anchor">Very much</span></div>
+          </div>
+          <div class="likert-group">
+            <label class="likert-label">After your third choice in the first round, did you feel guilt?</label>
+            <div class="likert-scale"><span class="likert-anchor">Not at all</span><div class="likert-options"><label><input type="radio" name="r1_t3_guilt" value="1"><span>1</span></label><label><input type="radio" name="r1_t3_guilt" value="2"><span>2</span></label><label><input type="radio" name="r1_t3_guilt" value="3"><span>3</span></label><label><input type="radio" name="r1_t3_guilt" value="4"><span>4</span></label><label><input type="radio" name="r1_t3_guilt" value="5"><span>5</span></label></div><span class="likert-anchor">Very much</span></div>
+          </div>
+          <div class="likert-group">
+            <label class="likert-label">After your third choice in the first round, did you feel amusement?</label>
+            <div class="likert-scale"><span class="likert-anchor">Not at all</span><div class="likert-options"><label><input type="radio" name="r1_t3_amusement" value="1"><span>1</span></label><label><input type="radio" name="r1_t3_amusement" value="2"><span>2</span></label><label><input type="radio" name="r1_t3_amusement" value="3"><span>3</span></label><label><input type="radio" name="r1_t3_amusement" value="4"><span>4</span></label><label><input type="radio" name="r1_t3_amusement" value="5"><span>5</span></label></div><span class="likert-anchor">Very much</span></div>
           </div>
         </div>
-
-        <div class="survey-section">
-          <h3>Choice Reflection</h3>
-          <div class="form-group">
-            <label for="choice-recon" class="likert-label" style="font-size: 0.95rem; margin-bottom: 0.8rem;">Please briefly describe why you made the choices you did:</label>
-            <textarea id="choice-recon" class="textarea" rows="4" placeholder="Type your response here..."></textarea>
-          </div>
-        </div>
-        <p class="survey-error" id="survey-error"></p>
-        <button class="btn btn-next" id="btn-submit-survey">Submit</button>
       </div>
-    </section>
+
+      <!-- SECTION 3: Round 2 -->
+      <div class="survey-section" id="survey-sec-3">
+        <h3>Section 3: Second Round</h3>
+        
+        <div class="form-group" style="margin-bottom: 1.5rem;">
+          <label class="likert-label">What was your total reward in the second round? (excluding initial base & round 1)</label>
+          <div class="survey-radio-list">
+            <label class="radio-option"><input type="radio" name="r2_reward" value="20" required><span data-cur-val="20">20p</span></label>
+            <label class="radio-option"><input type="radio" name="r2_reward" value="40"><span data-cur-val="40">40p</span></label>
+            <label class="radio-option"><input type="radio" name="r2_reward" value="80"><span data-cur-val="80">80p</span></label>
+            <label class="radio-option"><input type="radio" name="r2_reward" value="dont_remember"><span>Don't remember</span></label>
+          </div>
+        </div>
+
+        <div class="likert-group">
+          <label class="likert-label">When starting the second round, how much did you trust your opponent?</label>
+          <div class="likert-scale"><span class="likert-anchor">Not at all</span><div class="likert-options"><label><input type="radio" name="r2_trust_before" value="1" required><span>1</span></label><label><input type="radio" name="r2_trust_before" value="2"><span>2</span></label><label><input type="radio" name="r2_trust_before" value="3"><span>3</span></label><label><input type="radio" name="r2_trust_before" value="4"><span>4</span></label><label><input type="radio" name="r2_trust_before" value="5"><span>5</span></label></div><span class="likert-anchor">Very much</span></div>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 1.5rem;">
+          <label class="likert-label">What did you choose in your first turn of the second round?</label>
+          <div class="survey-radio-list">
+            <label class="radio-option"><input type="radio" name="r2_t1_choice" value="C" required><span>Cooperate</span></label>
+            <label class="radio-option"><input type="radio" name="r2_t1_choice" value="D"><span>Defect</span></label>
+            <label class="radio-option"><input type="radio" name="r2_t1_choice" value="dont_remember"><span>Don't remember</span></label>
+          </div>
+        </div>
+
+        <div class="likert-group">
+          <label class="likert-label">When making your first choice, how much did you expect your opponent to cooperate in the next turn?</label>
+          <div class="likert-scale"><span class="likert-anchor">Not at all</span><div class="likert-options"><label><input type="radio" name="r2_expect_before" value="1" required><span>1</span></label><label><input type="radio" name="r2_expect_before" value="2"><span>2</span></label><label><input type="radio" name="r2_expect_before" value="3"><span>3</span></label><label><input type="radio" name="r2_expect_before" value="4"><span>4</span></label><label><input type="radio" name="r2_expect_before" value="5"><span>5</span></label></div><span class="likert-anchor">Very much</span></div>
+        </div>
+
+        <div class="likert-group">
+          <label class="likert-label">After your first choice in the second round, did you feel relief?</label>
+          <div class="likert-scale"><span class="likert-anchor">Not at all</span><div class="likert-options"><label><input type="radio" name="r2_t1_relief" value="1" required><span>1</span></label><label><input type="radio" name="r2_t1_relief" value="2"><span>2</span></label><label><input type="radio" name="r2_t1_relief" value="3"><span>3</span></label><label><input type="radio" name="r2_t1_relief" value="4"><span>4</span></label><label><input type="radio" name="r2_t1_relief" value="5"><span>5</span></label></div><span class="likert-anchor">Very much</span></div>
+        </div>
+        <div class="likert-group">
+          <label class="likert-label">After your first choice in the second round, did you feel a sense of triumph?</label>
+          <div class="likert-scale"><span class="likert-anchor">Not at all</span><div class="likert-options"><label><input type="radio" name="r2_t1_triumph" value="1" required><span>1</span></label><label><input type="radio" name="r2_t1_triumph" value="2"><span>2</span></label><label><input type="radio" name="r2_t1_triumph" value="3"><span>3</span></label><label><input type="radio" name="r2_t1_triumph" value="4"><span>4</span></label><label><input type="radio" name="r2_t1_triumph" value="5"><span>5</span></label></div><span class="likert-anchor">Very much</span></div>
+        </div>
+        <div class="likert-group">
+          <label class="likert-label">After your first choice in the second round, did you feel guilt?</label>
+          <div class="likert-scale"><span class="likert-anchor">Not at all</span><div class="likert-options"><label><input type="radio" name="r2_t1_guilt" value="1" required><span>1</span></label><label><input type="radio" name="r2_t1_guilt" value="2"><span>2</span></label><label><input type="radio" name="r2_t1_guilt" value="3"><span>3</span></label><label><input type="radio" name="r2_t1_guilt" value="4"><span>4</span></label><label><input type="radio" name="r2_t1_guilt" value="5"><span>5</span></label></div><span class="likert-anchor">Very much</span></div>
+        </div>
+        <div class="likert-group">
+          <label class="likert-label">After your first choice in the second round, did you feel amusement?</label>
+          <div class="likert-scale"><span class="likert-anchor">Not at all</span><div class="likert-options"><label><input type="radio" name="r2_t1_amusement" value="1" required><span>1</span></label><label><input type="radio" name="r2_t1_amusement" value="2"><span>2</span></label><label><input type="radio" name="r2_t1_amusement" value="3"><span>3</span></label><label><input type="radio" name="r2_t1_amusement" value="4"><span>4</span></label><label><input type="radio" name="r2_t1_amusement" value="5"><span>5</span></label></div><span class="likert-anchor">Very much</span></div>
+        </div>
+
+        <div id="r2-turn3-questions">
+          <hr style="margin: 2rem 0; border: none; border-top: 1px solid var(--border-color);">
+          <div class="likert-group">
+            <label class="likert-label">After the opponent's choice in their turn (cooperate or defect), how much did you trust the opponent?</label>
+            <div class="likert-scale"><span class="likert-anchor">Not at all</span><div class="likert-options"><label><input type="radio" name="r2_trust_after_opp" value="1"><span>1</span></label><label><input type="radio" name="r2_trust_after_opp" value="2"><span>2</span></label><label><input type="radio" name="r2_trust_after_opp" value="3"><span>3</span></label><label><input type="radio" name="r2_trust_after_opp" value="4"><span>4</span></label><label><input type="radio" name="r2_trust_after_opp" value="5"><span>5</span></label></div><span class="likert-anchor">Very much</span></div>
+          </div>
+          
+          <div class="form-group" style="margin-bottom: 1.5rem;">
+            <label class="likert-label">What did you choose in your third turn of the second round?</label>
+            <div class="survey-radio-list">
+              <label class="radio-option"><input type="radio" name="r2_t3_choice" value="C"><span>Cooperate</span></label>
+              <label class="radio-option"><input type="radio" name="r2_t3_choice" value="D"><span>Defect</span></label>
+              <label class="radio-option"><input type="radio" name="r2_t3_choice" value="dont_remember"><span>Don't remember</span></label>
+            </div>
+          </div>
+
+          <div class="likert-group">
+            <label class="likert-label">After your third choice in the second round, did you feel relief?</label>
+            <div class="likert-scale"><span class="likert-anchor">Not at all</span><div class="likert-options"><label><input type="radio" name="r2_t3_relief" value="1"><span>1</span></label><label><input type="radio" name="r2_t3_relief" value="2"><span>2</span></label><label><input type="radio" name="r2_t3_relief" value="3"><span>3</span></label><label><input type="radio" name="r2_t3_relief" value="4"><span>4</span></label><label><input type="radio" name="r2_t3_relief" value="5"><span>5</span></label></div><span class="likert-anchor">Very much</span></div>
+          </div>
+          <div class="likert-group">
+            <label class="likert-label">After your third choice in the second round, did you feel a sense of triumph?</label>
+            <div class="likert-scale"><span class="likert-anchor">Not at all</span><div class="likert-options"><label><input type="radio" name="r2_t3_triumph" value="1"><span>1</span></label><label><input type="radio" name="r2_t3_triumph" value="2"><span>2</span></label><label><input type="radio" name="r2_t3_triumph" value="3"><span>3</span></label><label><input type="radio" name="r2_t3_triumph" value="4"><span>4</span></label><label><input type="radio" name="r2_t3_triumph" value="5"><span>5</span></label></div><span class="likert-anchor">Very much</span></div>
+          </div>
+          <div class="likert-group">
+            <label class="likert-label">After your third choice in the second round, did you feel guilt?</label>
+            <div class="likert-scale"><span class="likert-anchor">Not at all</span><div class="likert-options"><label><input type="radio" name="r2_t3_guilt" value="1"><span>1</span></label><label><input type="radio" name="r2_t3_guilt" value="2"><span>2</span></label><label><input type="radio" name="r2_t3_guilt" value="3"><span>3</span></label><label><input type="radio" name="r2_t3_guilt" value="4"><span>4</span></label><label><input type="radio" name="r2_t3_guilt" value="5"><span>5</span></label></div><span class="likert-anchor">Very much</span></div>
+          </div>
+          <div class="likert-group">
+            <label class="likert-label">After your third choice in the second round, did you feel amusement?</label>
+            <div class="likert-scale"><span class="likert-anchor">Not at all</span><div class="likert-options"><label><input type="radio" name="r2_t3_amusement" value="1"><span>1</span></label><label><input type="radio" name="r2_t3_amusement" value="2"><span>2</span></label><label><input type="radio" name="r2_t3_amusement" value="3"><span>3</span></label><label><input type="radio" name="r2_t3_amusement" value="4"><span>4</span></label><label><input type="radio" name="r2_t3_amusement" value="5"><span>5</span></label></div><span class="likert-anchor">Very much</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION 4: Social Presence -->
+      <div class="survey-section" id="survey-sec-4">
+        <h3>Section 4: Social Presence</h3>
+        <p class="survey-instruction">Please indicate how much you agree with the following statements regarding your experience playing with the opponent.</p>
+        
+        <script>
+          const spQuestions = [
+            { id: 'sp1', text: 'I could feel the presence of the opponent.' },
+            { id: 'sp2', text: 'I could barely notice the opponent was there.' },
+            { id: 'sp3', text: 'I sometimes felt I was alone during the game.' },
+            { id: 'sp4', text: 'The opponent will feel my presence.' },
+            { id: 'sp5', text: 'My choices were clearly communicated to the opponent.' },
+            { id: 'sp6', text: 'The opponent\'s choices were clearly communicated to me.' },
+            { id: 'sp7', text: 'I could understand the opponent\'s intentions.' },
+            { id: 'sp8', text: 'The opponent could probably understand my intentions.' },
+            { id: 'sp9', text: 'I sometimes pretended to pay attention to the opponent.' },
+            { id: 'sp10', text: 'I concentrated on the game with the opponent.' },
+            { id: 'sp11', text: 'The opponent probably concentrated on the game with me.' },
+            { id: 'sp12', text: 'When I had other thoughts, my attention easily wandered.' },
+            { id: 'sp13', text: 'I felt a sense of friendliness toward the opponent.' },
+            { id: 'sp14', text: 'I felt close to the opponent.' },
+            { id: 'sp15', text: 'I felt an emotional connection with the opponent.' },
+            { id: 'sp16', text: 'I felt like I was in the same place as the opponent.' },
+            { id: 'sp17', text: 'I felt like I was actually with the opponent.' },
+            { id: 'sp18', text: 'I felt like the opponent was right next to or in front of me.' }
+          ];
+          document.write(spQuestions.map(q => `
+            <div class="likert-group">
+              <label class="likert-label">${q.text}</label>
+              <div class="likert-scale">
+                <span class="likert-anchor">Strongly Disagree</span>
+                <div class="likert-options">
+                  <label><input type="radio" name="${q.id}" value="1" required><span>1</span></label>
+                  <label><input type="radio" name="${q.id}" value="2"><span>2</span></label>
+                  <label><input type="radio" name="${q.id}" value="3"><span>3</span></label>
+                  <label><input type="radio" name="${q.id}" value="4"><span>4</span></label>
+                  <label><input type="radio" name="${q.id}" value="5"><span>5</span></label>
+                </div>
+                <span class="likert-anchor">Strongly Agree</span>
+              </div>
+            </div>
+          `).join(''));
+        </script>
+      </div>
+
+      <p class="survey-error" id="survey-error"></p>
+      <button type="submit" class="btn btn-next" id="btn-submit-survey" style="width: 100%; margin-top: 1rem;">Submit Survey</button>
+    </form>
+  </div>
+</section>
+
 
     <!-- ==================== COMPLETE ==================== -->
 
