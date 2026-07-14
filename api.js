@@ -5,7 +5,7 @@
 
 const API = {
   // Google Apps Script Web App URL
-  GAS_URL: 'https://script.google.com/macros/s/AKfycbwMLFXsQxikpNHoCnxVWQ4J2MU7zbW3kQyGNbxzgHKCfH3j_uKZZxBY2VRNbLBc1GyKTA/exec',
+  GAS_URL: 'https://script.google.com/macros/s/AKfycbxrk39rhUYK-b3Czq4o3M1Erg54ylMm5-edScYr8pg4qxOOvG-YgTTHkSebc1YgSTiWRg/exec',
 
   /**
    * Submit all collected data to Google Sheets
