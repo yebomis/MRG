@@ -885,6 +885,18 @@
         const formData = new FormData(form);
         const surveyData = Object.fromEntries(formData.entries());
 
+        // Calculate Composite Social Presence Score
+        const spPositive = ['sp4', 'sp5', 'sp6', 'sp7', 'sp8', 'sp10', 'sp13', 'sp14', 'sp15', 'sp16', 'sp17', 'sp18'];
+        const spNegative = ['sp3', 'sp9', 'sp12'];
+        let spScore = 0;
+        
+        spPositive.forEach(id => {
+          if (surveyData[id]) spScore += parseInt(surveyData[id]);
+        });
+        spNegative.forEach(id => {
+          if (surveyData[id]) spScore -= parseInt(surveyData[id]);
+        });
+
         // Aggregate all data to send in one batch
         const finalData = {
           cloudResearchId: state.cloudResearchId,
@@ -908,6 +920,7 @@
           
           game_totalReward: state.totalReward,
           
+          survey_socialPresenceScore: spScore,
           ...surveyData
         };
 
