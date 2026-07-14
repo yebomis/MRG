@@ -829,10 +829,14 @@
 
     // Initialize visibility based on actual game choices
     if (state.rounds[1].turn1Choice === 'D') {
-      document.getElementById('r1-turn3-questions').style.display = 'none';
+      const qDiv1 = document.getElementById('r1-turn3-questions');
+      qDiv1.style.display = 'none';
+      qDiv1.querySelectorAll('input').forEach(i => i.required = false);
     }
     if (state.rounds[2].turn1Choice === 'D') {
-      document.getElementById('r2-turn3-questions').style.display = 'none';
+      const qDiv2 = document.getElementById('r2-turn3-questions');
+      qDiv2.style.display = 'none';
+      qDiv2.querySelectorAll('input').forEach(i => i.required = false);
     }
 
     // Handle conditional hiding for Round 1
@@ -842,6 +846,7 @@
         const qDiv = document.getElementById('r1-turn3-questions');
         if (e.target.value === 'D') {
           qDiv.style.display = 'none';
+          qDiv.querySelectorAll('input').forEach(i => i.required = false);
         } else {
           qDiv.style.display = 'block';
         }
@@ -855,6 +860,7 @@
         const qDiv = document.getElementById('r2-turn3-questions');
         if (e.target.value === 'D') {
           qDiv.style.display = 'none';
+          qDiv.querySelectorAll('input').forEach(i => i.required = false);
         } else {
           qDiv.style.display = 'block';
         }
