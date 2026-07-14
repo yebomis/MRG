@@ -942,7 +942,7 @@
     const cond = state.condition;
     const fmt = cond.formatReward;
     $('#final-total').textContent = fmt(state.totalReward);
-    $('#completion-code').textContent = generateCompletionCode();
+    $('#completion-code').textContent = cond.completionCode;
 
     // Show debriefing based on condition
     const debriefingSection = $('#debriefing-section');

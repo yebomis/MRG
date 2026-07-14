@@ -34,7 +34,8 @@ const CONDITIONS = {
       return `${sign}${abs}p`;
     },
     opponentDescription: `Your opponent in this game is <strong>an AI agent</strong>.<br><br>The AI agent is designed to make the most rational decisions based on its trained algorithm.`,
-    rewardDescription: `Your outcomes will be measured in <strong>points (p)</strong>. Points earned during the game will determine your final bonus.`
+    rewardDescription: `Your outcomes will be measured in <strong>points (p)</strong>. Points earned during the game will determine your final bonus.`,
+    completionCode: '978E31999D'
   },
   2: {
     id: 2,
@@ -50,7 +51,8 @@ const CONDITIONS = {
       return `${sign}$${dollars}`;
     },
     opponentDescription: `Your opponent in this game is <strong>an AI agent</strong>.<br><br>The AI agent is designed to make the most rational decisions based on its trained algorithm.`,
-    rewardDescription: `Your outcomes will be measured in <strong>Dollars ($)</strong>. The money earned during the game will be directly added to your payment.`
+    rewardDescription: `Your outcomes will be measured in <strong>Dollars ($)</strong>. The money earned during the game will be directly added to your payment.`,
+    completionCode: '6617A2185E'
   },
   3: {
     id: 3,
@@ -66,7 +68,8 @@ const CONDITIONS = {
       return `${sign}${abs}p`;
     },
     opponentDescription: `Your opponent is <strong>another participant</strong> in this experiment.<br><br>However, your opponent has been assigned <strong>different conditions</strong> from you. Instead of making choices directly, they must <strong>follow the decisions of an AI agent</strong>.<br><br>In other words, when the opponent asks the AI whether to cooperate or defect, they must follow whatever the AI answers.<br><br>The AI agent is designed to make the most rational decisions based on its trained algorithm.<br><br>However, the <strong>rewards earned through the game</strong> go to the <strong>participant themselves</strong>, not the AI.`,
-    rewardDescription: `Your outcomes will be measured in <strong>points (p)</strong>. Points earned during the game will determine your final bonus.`
+    rewardDescription: `Your outcomes will be measured in <strong>points (p)</strong>. Points earned during the game will determine your final bonus.`,
+    completionCode: '2E851C7223'
   },
   4: {
     id: 4,
@@ -82,7 +85,8 @@ const CONDITIONS = {
       return `${sign}$${dollars}`;
     },
     opponentDescription: `Your opponent is <strong>another participant</strong> in this experiment.<br><br>However, your opponent has been assigned <strong>different conditions</strong> from you. Instead of making choices directly, they must <strong>follow the decisions of an AI agent</strong>.<br><br>In other words, when the opponent asks the AI whether to cooperate or defect, they must follow whatever the AI answers.<br><br>The AI agent is designed to make the most rational decisions based on its trained algorithm.<br><br>However, the <strong>rewards earned through the game</strong> go to the <strong>participant themselves</strong>, not the AI.`,
-    rewardDescription: `Your outcomes will be measured in <strong>Dollars ($)</strong>. The money earned during the game will be directly added to your payment.`
+    rewardDescription: `Your outcomes will be measured in <strong>Dollars ($)</strong>. The money earned during the game will be directly added to your payment.`,
+    completionCode: 'E88A6AC1F5'
   }
 };
 
